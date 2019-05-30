@@ -6,6 +6,7 @@ This package aims to provide an easier way to compile front-end assets, using Sa
 
 ## Roadmap
 
+- Don't re-compile unchanged assets
 - Minify compiled files, for production builds
 - Add support for PostCSS
 - Add support for Vue
