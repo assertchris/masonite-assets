@@ -22,6 +22,11 @@ def sass_config_file(base_path):
     if os.path.isfile(config_js):
         return config_js
 
+    config_json = os.path.join(base_path, '.sassrc.json')
+
+    if os.path.isfile(config_json):
+        return config_json
+
     config_bare = os.path.join(base_path, '.sassrc')
 
     if os.path.isfile(config_bare):
