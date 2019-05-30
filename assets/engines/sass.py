@@ -1,12 +1,13 @@
 from subprocess import check_call, CalledProcessError
+from config import application
 import os
 
 from assets.engines.config import sass_config_file
 from assets.engines.messages import (sass_info_compile, sass_info_install, sass_error_compile, sass_error_npm_install, sass_error_npm_missing)
 
-log = os.path.join('.', '.sass.log')
-binary = os.path.join('.', 'node_modules', '.bin', 'node-sass')
-config = sass_config_file('.')
+log = os.path.join(application.BASE_DIRECTORY, '.sass.log')
+binary = os.path.join(application.BASE_DIRECTORY, 'node_modules', '.bin', 'node-sass')
+config = sass_config_file(application.BASE_DIRECTORY)
 
 def sass_compile(in_file, out_folder):
     print(sass_info_compile.format(in_file = in_file))
@@ -61,9 +62,3 @@ def sass_install():
 
 if not os.path.isfile(binary):
     sass_install()
-
-if __name__ == '__main__':
-    sass_compile(
-        os.path.join('.', 'storage', 'static', 'sass', 'app.scss'),
-        os.path.join('.', 'storage', 'compiled')
-    )

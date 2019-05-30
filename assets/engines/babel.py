@@ -1,12 +1,13 @@
 from subprocess import check_call, CalledProcessError
+from config import application
 import os
 
 from assets.engines.config import babel_config_file
 from assets.engines.messages import (babel_info_compile, babel_info_install, babel_error_compile, babel_error_npm_install, babel_error_npm_missing)
 
-log = os.path.join('.', '.babel.log')
-binary = os.path.join('.', 'node_modules', '.bin', 'babel')
-config = babel_config_file('.')
+log = os.path.join(application.BASE_DIRECTORY, '.babel.log')
+binary = os.path.join(application.BASE_DIRECTORY, 'node_modules', '.bin', 'babel')
+config = babel_config_file(application.BASE_DIRECTORY)
 
 def babel_compile(in_file, out_folder):
     print(babel_info_compile.format(in_file = in_file))
@@ -46,9 +47,3 @@ def babel_install():
 
 if not os.path.isfile(binary):
     babel_install()
-
-if __name__ == '__main__':
-    babel_compile(
-        os.path.join('.', 'storage', 'static', 'js', 'app.js'),
-        os.path.join('.', 'storage', 'compiled')
-    )

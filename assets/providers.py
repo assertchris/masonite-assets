@@ -13,9 +13,11 @@ class AssetsProvider(ServiceProvider):
     def register(self):
         self.app.bind('AssetsInstallCommand', InstallCommand())
 
-    def boot(self):
         self.compile_babel()
         self.compile_sass()
+
+    def boot(self):
+        pass
 
     def compile_babel(self):
         matches = self.matches_for_extensions(
