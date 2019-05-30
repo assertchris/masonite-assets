@@ -1,14 +1,14 @@
 from subprocess import check_call, CalledProcessError
 import os
 
-from _config import sass_config_file
-from _messages import (sass_info_compile, sass_info_install, sass_error_compile, sass_error_npm_install, sass_error_npm_missing)
+from assets.engines.config import sass_config_file
+from assets.engines.messages import (sass_info_compile, sass_info_install, sass_error_compile, sass_error_npm_install, sass_error_npm_missing)
 
 log = os.path.join('.', '.sass.log')
 binary = os.path.join('.', 'node_modules', '.bin', 'node-sass')
 config = sass_config_file('.')
 
-def compile(in_file, out_folder):
+def sass_compile(in_file, out_folder):
     print(sass_info_compile.format(in_file = in_file))
 
     if not config:
@@ -45,7 +45,7 @@ def compile(in_file, out_folder):
         except CalledProcessError:
             print(sass_error_compile.format(log = log))
 
-def install():
+def sass_install():
     print(sass_info_install)
 
     try:
@@ -60,7 +60,10 @@ def install():
         print(sass_error_npm_missing)
 
 if not os.path.isfile(binary):
-    install()
+    sass_install()
 
-# DEBUG
-compile(os.path.join('.', 'storage', 'static', 'sass', 'app.scss'), os.path.join('.', 'storage', 'compiled'))
+if __name__ == '__main__':
+    sass_compile(
+        os.path.join('.', 'storage', 'static', 'sass', 'app.scss'),
+        os.path.join('.', 'storage', 'compiled')
+    )
