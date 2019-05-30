@@ -2,7 +2,7 @@
 
 This package aims to provide an easier way to compile front-end assets, using Sass and Babel.
 
-**This module is stil in development**
+**This module is still in development**
 
 ## Roadmap
 
